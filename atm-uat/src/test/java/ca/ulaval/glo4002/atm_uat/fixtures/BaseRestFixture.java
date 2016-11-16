@@ -4,7 +4,7 @@ import static io.restassured.RestAssured.given;
 
 import javax.ws.rs.core.MediaType;
 
-import ca.ulaval.glo4002.atm_uat.JettyStarterHook;
+import ca.ulaval.glo4002.atm_uat.runners.JettyStarterHook;
 import io.restassured.specification.RequestSpecification;
 
 public class BaseRestFixture {

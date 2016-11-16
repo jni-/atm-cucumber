@@ -1,8 +1,10 @@
 package ca.ulaval.glo4002.atm_uat.fixtures;
 
-import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerFactoryProvider;
 import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
@@ -10,33 +12,27 @@ import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
 public class HibernateBaseFixture {
 
 
-    protected void withEntityManager(Runnable action) {
+    protected void withEntityManager(Consumer<EntityTransaction> action) {
         EntityManager entityManager = EntityManagerFactoryProvider.getFactory().createEntityManager();
         try {
             EntityManagerProvider.setEntityManager(entityManager);
 
-            entityManager.getTransaction().begin();
-            action.run();
-            entityManager.getTransaction().commit();
-
+            EntityTransaction transaction = entityManager.getTransaction();
+            action.accept(transaction);
         } finally {
             entityManager.close();
         }
     }
     
-    protected <T> T withEntityManager(Supplier<T> action) {
+    protected <T> T withEntityManager(Function<EntityTransaction, T> action) {
         EntityManager entityManager = EntityManagerFactoryProvider.getFactory().createEntityManager();
         try {
             EntityManagerProvider.setEntityManager(entityManager);
 
-            entityManager.getTransaction().begin();
-            T result = action.get();
-            entityManager.getTransaction().commit();
-            return result;
-
+            EntityTransaction transaction = entityManager.getTransaction();
+            return action.apply(transaction);
         } finally {
             entityManager.close();
         }
-    
     }
 }

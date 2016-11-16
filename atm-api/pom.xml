@@ -15,7 +15,6 @@
 		<hibernate.version>5.2.3.Final</hibernate.version>
 		<h2.version>1.4.192</h2.version>
 		<exec-plugin.version>1.2.1</exec-plugin.version>
-		<usb4java.version>1.2.0</usb4java.version>
 	</properties>
 
 	<dependencies>
@@ -48,12 +47,6 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.usb4java</groupId>
-			<artifactId>usb4java-javax</artifactId>
-			<version>${usb4java.version}</version>
 		</dependency>
 	</dependencies>
 

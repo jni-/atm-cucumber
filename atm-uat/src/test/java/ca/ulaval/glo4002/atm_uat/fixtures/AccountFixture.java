@@ -17,13 +17,18 @@ public class AccountFixture extends HibernateBaseFixture {
     }
 
     public void givenAnAccount(Integer accountNumber, Double initialAmount) {
-        withEntityManager(() -> {
+        withEntityManager((tx) -> {
+            tx.begin();
             accountRepository.persist(new StandardAccount(accountNumber, initialAmount)); 
+            tx.commit();
         });
     }
 
     public void thenAccountBalanceEquals(int accountNumber, double expectedBalance) {
-        Account account = withEntityManager(() -> accountRepository.findByNumber(accountNumber));
+        Account account = withEntityManager((tx) -> {
+            return accountRepository.findByNumber(accountNumber);
+        });
+
         assertEquals(expectedBalance, account.getBalance(), DELTA);
     }
 }

@@ -1,7 +1,8 @@
-package ca.ulaval.glo4002.atm_uat;
+package ca.ulaval.glo4002.atm_uat.runners;
 
 import cucumber.api.java.Before;
 import ca.ulaval.glo4002.atm_api.AtmServer;
+import ca.ulaval.glo4002.atm_uat.contexts.UatContext;
 
 public class JettyStarterHook {
     public static final int JETTY_TEST_PORT = 15146;

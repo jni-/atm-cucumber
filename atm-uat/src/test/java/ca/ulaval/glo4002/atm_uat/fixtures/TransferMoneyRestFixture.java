@@ -23,13 +23,18 @@ public class TransferMoneyRestFixture extends BaseRestFixture {
             .body(new TransferRequest(amount))
         .when()
             .post(uri);
-        
     }
     
     public void thenTheTransactionIsAccepted(double amount) {
         currentRequest.then()
             .statusCode(Status.CREATED.getStatusCode())
             .and().body("accepted", equalTo(true))
-            .and().body("amount", equalTo(amount));
+            .and().body("amount", equalTo((float) amount));
+    }
+
+    public void thenTheTransactionIsRefused() {
+        currentRequest.then()
+            .statusCode(Status.CREATED.getStatusCode())
+            .and().body("accepted", equalTo(false));
     }
 }
