@@ -1,8 +1,8 @@
-package ca.ulaval.glo4002.atm_uat.steps;
+package ca.ulaval.glo4002.features.steps;
 
-import ca.ulaval.glo4002.atm_uat.fixtures.AccountFixture;
-import ca.ulaval.glo4002.atm_uat.fixtures.BankFixture;
-import ca.ulaval.glo4002.atm_uat.fixtures.TransferMoneyRestFixture;
+import ca.ulaval.glo4002.features.fixtures.AccountFixture;
+import ca.ulaval.glo4002.features.fixtures.BankFixture;
+import ca.ulaval.glo4002.features.fixtures.TransferMoneyRestFixture;
 import cucumber.api.java8.En;
 
 public class TransferMoneySteps implements En {

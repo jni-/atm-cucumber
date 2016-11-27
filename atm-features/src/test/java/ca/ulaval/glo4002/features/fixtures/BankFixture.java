@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.atm_uat.fixtures;
+package ca.ulaval.glo4002.features.fixtures;
 
 import ca.ulaval.glo4002.atm_api.application.banking.BankingService;
 import ca.ulaval.glo4002.atm_api.rest.TransferRequest;

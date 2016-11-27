@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.atm_uat.fixtures;
+package ca.ulaval.glo4002.features.fixtures;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

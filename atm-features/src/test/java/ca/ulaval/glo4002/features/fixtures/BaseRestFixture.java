@@ -1,10 +1,10 @@
-package ca.ulaval.glo4002.atm_uat.fixtures;
+package ca.ulaval.glo4002.features.fixtures;
 
 import static io.restassured.RestAssured.given;
 
 import javax.ws.rs.core.MediaType;
 
-import ca.ulaval.glo4002.atm_uat.runners.JettyStarterHook;
+import ca.ulaval.glo4002.features.runners.JettyStarterHook;
 import io.restassured.specification.RequestSpecification;
 
 public class BaseRestFixture {

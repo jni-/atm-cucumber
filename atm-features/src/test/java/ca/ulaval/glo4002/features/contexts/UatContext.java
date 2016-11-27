@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.atm_uat.contexts;
+package ca.ulaval.glo4002.features.contexts;
 
 import ca.ulaval.glo4002.atm_api.application.ServiceLocator;
 import ca.ulaval.glo4002.atm_api.application.banking.BankingService;
