@@ -111,6 +111,6 @@
 
 	<modules>
 		<module>atm-api</module>
-		<module>atm-uat</module>
+		<module>atm-features</module>
 	</modules>
 </project>
