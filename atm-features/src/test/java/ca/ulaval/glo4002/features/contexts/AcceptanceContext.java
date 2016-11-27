@@ -6,7 +6,7 @@ import ca.ulaval.glo4002.atm_api.contexts.Context;
 import ca.ulaval.glo4002.atm_api.domain.accounts.AccountRepository;
 import ca.ulaval.glo4002.atm_api.infrastructure.persistence.HibernateAccountRepository;
 
-public class UatContext implements Context {
+public class AcceptanceContext implements Context {
 
     @Override
     public void apply() {

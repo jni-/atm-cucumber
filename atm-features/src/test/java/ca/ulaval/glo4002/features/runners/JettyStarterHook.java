@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.features.runners;
 
 import cucumber.api.java.Before;
 import ca.ulaval.glo4002.atm_api.AtmServer;
-import ca.ulaval.glo4002.features.contexts.UatContext;
+import ca.ulaval.glo4002.features.contexts.AcceptanceContext;
 
 public class JettyStarterHook {
     public static final int JETTY_TEST_PORT = 15146;
@@ -21,7 +21,7 @@ public class JettyStarterHook {
  
     private void startJettyServer() throws Exception {
         server = new AtmServer();
-        server.start(JETTY_TEST_PORT, new UatContext());
+        server.start(JETTY_TEST_PORT, new AcceptanceContext());
     }
  
     private class JettyServerShutdown extends Thread {
