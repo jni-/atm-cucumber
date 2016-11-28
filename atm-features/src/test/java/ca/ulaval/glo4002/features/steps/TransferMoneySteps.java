@@ -16,9 +16,14 @@ public class TransferMoneySteps implements En {
     private TransferMoneyFixture transferMoneyFixture;
     private AccountFixture accountsFixture;
 
+    //
+    // *** Should be in a common hook or somewhere else on a real project
+    //     because this hook is global to all Steps Definitions 
+    //     but in this demo we have only one Step Definiton so...
+    //
     @Before
     public void beforeScenario() throws Throwable {
-
+        
         String testsScope = System.getProperty("acctests.scope", "UNDEFINED");
 
         switch (testsScope) {
