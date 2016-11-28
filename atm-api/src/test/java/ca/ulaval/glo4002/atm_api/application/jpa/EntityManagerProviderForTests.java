@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import javax.persistence.EntityManager;
 
-public class EntityManagerProviderForTests extends EntityManagerProvider {
+public class EntityManagerProviderForTests extends ThreadLocalJpaEntityManagerProvider {
 
     @Override
     public void executeInTransaction(Runnable transaction) {

@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.atm_api.application.banking;
 
 import ca.ulaval.glo4002.atm_api.application.ServiceLocator;
 import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
+import ca.ulaval.glo4002.atm_api.application.jpa.ThreadLocalJpaEntityManagerProvider;
 import ca.ulaval.glo4002.atm_api.domain.accounts.Account;
 import ca.ulaval.glo4002.atm_api.domain.accounts.AccountRepository;
 import ca.ulaval.glo4002.atm_api.domain.accounts.transactions.TransactionLog;
@@ -14,7 +15,7 @@ public class BankingService {
 
     public BankingService() {
         this.accountRepository = ServiceLocator.resolve(AccountRepository.class);
-        this.entityManagerProvider = new EntityManagerProvider();
+        this.entityManagerProvider = new ThreadLocalJpaEntityManagerProvider();
     }
 
     public BankingService(AccountRepository accountRepository, EntityManagerProvider provider) {

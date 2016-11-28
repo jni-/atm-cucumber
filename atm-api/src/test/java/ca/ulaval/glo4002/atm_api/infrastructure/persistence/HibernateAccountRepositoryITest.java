@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
+import ca.ulaval.glo4002.atm_api.application.jpa.ThreadLocalJpaEntityManagerProvider;
 import ca.ulaval.glo4002.atm_api.domain.accounts.Account;
 import ca.ulaval.glo4002.atm_api.domain.accounts.StandardAccount;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class HibernateAccountRepositoryITest {
 
     @Before
     public void setUp() {
-        EntityManagerProvider.setEntityManager(entityManagerFactory.createEntityManager());
+        ThreadLocalJpaEntityManagerProvider.setEntityManager(entityManagerFactory.createEntityManager());
 
         accountRepository = new HibernateAccountRepository();
     }
@@ -37,7 +37,7 @@ public class HibernateAccountRepositoryITest {
     public void canSaveAndRetrieveAccount() {
         Account account = new StandardAccount(ACCOUNT_NUMBER, BALANCE);
 
-        new EntityManagerProvider().executeInTransaction(() -> accountRepository.persist(account));
+        new ThreadLocalJpaEntityManagerProvider().executeInTransaction(() -> accountRepository.persist(account));
 
         Account retrievedAccount = accountRepository.findByNumber(ACCOUNT_NUMBER);
         assertSameAccount(account, retrievedAccount);

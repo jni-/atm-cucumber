@@ -12,7 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerFactoryProvider;
-import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
+import ca.ulaval.glo4002.atm_api.application.jpa.ThreadLocalJpaEntityManagerProvider;
 
 public class EntityManagerContextFilter implements Filter {
 
@@ -30,13 +30,13 @@ public class EntityManagerContextFilter implements Filter {
 
         try {
             entityManager = entityManagerFactory.createEntityManager();
-            EntityManagerProvider.setEntityManager(entityManager);
+            ThreadLocalJpaEntityManagerProvider.setEntityManager(entityManager);
             chain.doFilter(request, response);
         } finally {
             if (entityManager != null) {
                 entityManager.close();
             }
-            EntityManagerProvider.clearEntityManager();
+            ThreadLocalJpaEntityManagerProvider.clearEntityManager();
         }
 
     }

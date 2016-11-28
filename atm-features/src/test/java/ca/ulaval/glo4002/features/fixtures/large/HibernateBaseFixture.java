@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerFactoryProvider;
-import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
+import ca.ulaval.glo4002.atm_api.application.jpa.ThreadLocalJpaEntityManagerProvider;
 
 public class HibernateBaseFixture {
 
@@ -15,7 +15,7 @@ public class HibernateBaseFixture {
     protected void withEntityManager(Consumer<EntityTransaction> action) {
         EntityManager entityManager = EntityManagerFactoryProvider.getFactory().createEntityManager();
         try {
-            EntityManagerProvider.setEntityManager(entityManager);
+            ThreadLocalJpaEntityManagerProvider.setEntityManager(entityManager);
 
             EntityTransaction transaction = entityManager.getTransaction();
             action.accept(transaction);
@@ -27,7 +27,7 @@ public class HibernateBaseFixture {
     protected <T> T withEntityManager(Function<EntityTransaction, T> action) {
         EntityManager entityManager = EntityManagerFactoryProvider.getFactory().createEntityManager();
         try {
-            EntityManagerProvider.setEntityManager(entityManager);
+            ThreadLocalJpaEntityManagerProvider.setEntityManager(entityManager);
 
             EntityTransaction transaction = entityManager.getTransaction();
             return action.apply(transaction);

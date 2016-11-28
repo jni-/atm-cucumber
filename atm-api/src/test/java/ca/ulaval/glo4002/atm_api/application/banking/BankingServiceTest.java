@@ -7,7 +7,7 @@ import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProvider;
+import ca.ulaval.glo4002.atm_api.application.jpa.ThreadLocalJpaEntityManagerProvider;
 import ca.ulaval.glo4002.atm_api.application.jpa.EntityManagerProviderForTests;
 import ca.ulaval.glo4002.atm_api.domain.accounts.Account;
 import ca.ulaval.glo4002.atm_api.domain.accounts.AccountRepository;
@@ -36,7 +36,7 @@ public class BankingServiceTest {
         toAccount = mock(Account.class);
 
         accountRepository = mock(AccountRepository.class);
-        EntityManagerProvider entityManagerProvider = new EntityManagerProviderForTests();
+        ThreadLocalJpaEntityManagerProvider entityManagerProvider = new EntityManagerProviderForTests();
         bankingService = new BankingService(accountRepository, entityManagerProvider);
 
         willReturn(fromAccount).given(accountRepository).findByNumber(FROM_ACCOUNT_NUMBER);

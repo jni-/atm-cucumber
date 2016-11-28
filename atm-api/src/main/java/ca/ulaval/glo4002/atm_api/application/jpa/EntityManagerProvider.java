@@ -4,32 +4,10 @@ import java.util.function.Supplier;
 
 import javax.persistence.EntityManager;
 
-public class EntityManagerProvider {
+public interface EntityManagerProvider {
 
-    private static ThreadLocal<EntityManager> localEntityManager = new ThreadLocal<>();
+    void executeInTransaction(Runnable transaction);
 
-    public EntityManager getEntityManager() {
-        return localEntityManager.get();
-    }
+    <T> T executeInTransaction(Supplier<T> transaction);
 
-    public void executeInTransaction(Runnable transaction) {
-        localEntityManager.get().getTransaction().begin();
-        transaction.run();
-        localEntityManager.get().getTransaction().commit();
-    }
-    
-    public <T> T executeInTransaction(Supplier<T> transaction) {
-        localEntityManager.get().getTransaction().begin();
-        T result = transaction.get();
-        localEntityManager.get().getTransaction().commit();
-        return result;
-    }
-
-    public static void setEntityManager(EntityManager entityManager) {
-        localEntityManager.set(entityManager);
-    }
-
-    public static void clearEntityManager() {
-        localEntityManager.set(null);
-    }
 }
