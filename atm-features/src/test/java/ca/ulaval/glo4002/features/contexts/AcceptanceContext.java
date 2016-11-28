@@ -10,6 +10,7 @@ public class AcceptanceContext implements Context {
 
     @Override
     public void apply() {
+        ServiceLocator.reset();
         ServiceLocator.registerSingleton(AccountRepository.class, new HibernateAccountRepository());
         ServiceLocator.registerSingleton(BankingService.class, new BankingService());
     }

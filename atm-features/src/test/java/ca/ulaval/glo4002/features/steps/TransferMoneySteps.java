@@ -1,23 +1,34 @@
 package ca.ulaval.glo4002.features.steps;
 
+import ca.ulaval.glo4002.features.contexts.AcceptanceContext;
 import ca.ulaval.glo4002.features.fixtures.AccountFixture;
 import ca.ulaval.glo4002.features.fixtures.BankFixture;
 import ca.ulaval.glo4002.features.fixtures.TransferMoneyRestFixture;
+import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
 public class TransferMoneySteps implements En {
+    
+    private TransferMoneyRestFixture transferMoney;
+    private AccountFixture accounts;
+    private BankFixture bank;
+
+    @Before
+    public void beforeScenario() {
+        new AcceptanceContext().apply();
+
+        transferMoney = new TransferMoneyRestFixture();
+        accounts = new AccountFixture();
+        bank = new BankFixture();
+    }
 
     public TransferMoneySteps() {
-        
-        TransferMoneyRestFixture transferMoney = new TransferMoneyRestFixture();
-        AccountFixture accounts = new AccountFixture();
 
         Given("^an account (\\d+) with (\\d+)\\$ in it$", (Integer accountNumber, Double initialAmount) -> {
             accounts.givenAnAccount(accountNumber, initialAmount);
         });
         
         When("^I create a transaction of (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {
-            BankFixture bank = new BankFixture();
             bank.whenATransferIsMade(sourceAccountNumber, recipientAccountNumber, amount);
         });
 
