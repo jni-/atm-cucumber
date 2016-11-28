@@ -8,10 +8,13 @@ import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.AcceptanceMediumAppContext;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppAccoungFixture;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppTransferMoneyFixture;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
 public class TransferMoneySteps implements En {
+
+    private static final int SOME_ACCOUNT_NUMBER = Integer.MAX_VALUE;
 
     private TransferMoneyFixture transferMoneyFixture;
     private AccountFixture accountsFixture;
@@ -52,12 +55,23 @@ public class TransferMoneySteps implements En {
         Given("^an account (\\d+) with (\\d+)\\$ in it$", (Integer accountNumber, Double initialAmount) -> {
             accountsFixture.givenAnAccount(accountNumber, initialAmount);
         });
+        
+        Given("^a maximum limit of (\\d+)\\$ per transfer for the account (\\d+)$", (Double maxLimit, Integer accountNumber) -> {
+            accountsFixture.givenAnAccount(accountNumber, maxLimit + 1000);
+            accountsFixture.givenTheLimitForAccount(accountNumber, maxLimit);
+        });
 
         When("^I create a transaction of (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {
             transferMoneyFixture.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
         });
 
         When("^I transfer (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {
+            transferMoneyFixture.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
+        });
+
+        When("^I transfer (\\d+)\\$ from (\\d+)$", (Double amount, Integer sourceAccountNumber) -> {
+            int recipientAccountNumber = SOME_ACCOUNT_NUMBER;
+            accountsFixture.givenAnAccount(recipientAccountNumber, 0.d);
             transferMoneyFixture.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
         });
 
@@ -73,6 +87,7 @@ public class TransferMoneySteps implements En {
             transferMoneyFixture.thenTheTransactionIsRefused();
         });
 
+        
     }
 
 }

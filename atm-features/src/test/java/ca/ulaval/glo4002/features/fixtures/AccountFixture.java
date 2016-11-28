@@ -6,4 +6,6 @@ public interface AccountFixture {
 
     void thenAccountBalanceEquals(int accountNumber, double expectedBalance);
 
+    void givenTheLimitForAccount(Integer accountNumber, Double maxLimit);
+
 }

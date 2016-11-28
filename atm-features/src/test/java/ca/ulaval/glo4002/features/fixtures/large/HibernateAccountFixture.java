@@ -17,21 +17,15 @@ public class HibernateAccountFixture extends HibernateBaseFixture implements Acc
         accountRepository = new HibernateAccountRepository();
     }
 
-    /* (non-Javadoc)
-     * @see ca.ulaval.glo4002.features.fixtures.large.AccountFixture#givenAnAccount(java.lang.Integer, java.lang.Double)
-     */
     @Override
     public void givenAnAccount(Integer accountNumber, Double initialAmount) {
         withEntityManager((tx) -> {
             tx.begin();
-            accountRepository.persist(new StandardAccount(accountNumber, initialAmount)); 
+            accountRepository.persist(new StandardAccount(accountNumber, initialAmount));
             tx.commit();
         });
     }
 
-    /* (non-Javadoc)
-     * @see ca.ulaval.glo4002.features.fixtures.large.AccountFixture#thenAccountBalanceEquals(int, double)
-     */
     @Override
     public void thenAccountBalanceEquals(int accountNumber, double expectedBalance) {
         Account account = withEntityManager((tx) -> {
@@ -40,4 +34,10 @@ public class HibernateAccountFixture extends HibernateBaseFixture implements Acc
 
         assertEquals(expectedBalance, account.getBalance(), DELTA);
     }
+
+    @Override
+    public void givenTheLimitForAccount(Integer accountNumber, Double maxLimit) {
+        throw new RuntimeException("TODO");
+    }
+
 }

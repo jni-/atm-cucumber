@@ -2,6 +2,11 @@ Feature: Transfering money
     In order to pay people easily
     As a bank user
     I want to be able to transfer money to others
+    
+Rules:
+    - Money are transfered between two accounts
+    - Produces a transaction log (accepted or refused)
+    - Transfering more than the maximum limit for the account -> refused *NEW
 
 @kind=happyPath
 Scenario: Transfering money adjusts the account balances 
@@ -24,3 +29,7 @@ Scenario: Transfering money when the account doesn't have the funds creates a re
     When I transfer 100$ from 555 to 666
     Then a transaction log shows that the transfer was refused
     
+Scenario: Transfering more than the max limit
+    Given a maximum limit of 999$ per transfer for the account 333
+    When I transfer 1000$ from 333
+    Then a transaction log shows that the transfer was refused

@@ -29,4 +29,9 @@ public class MediumAppAccoungFixture implements AccountFixture {
         assertEquals(expectedBalance, account.getBalance(), 0.01);
     }
 
+    @Override
+    public void givenTheLimitForAccount(Integer accountNumber, Double maxLimit) {
+        throw new RuntimeException("TODO");
+    }
+
 }
