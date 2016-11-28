@@ -49,9 +49,12 @@
             <exclude>**/*AcceptanceTest.java</exclude>
           </excludes>
         </configuration>
+        
         <executions>
+        
+          <!-- First execution with a MEDIUM scope -->
           <execution>
-            <id>integration-test</id>
+            <id>acctests-1-medium</id>
             <goals>
               <goal>test</goal>
             </goals>
@@ -63,8 +66,32 @@
               <includes>
                 <include>**/*AcceptanceTest.java</include>
               </includes>
+              <systemPropertyVariables>
+                <acctests.scope>mediumapp</acctests.scope>
+              </systemPropertyVariables>
             </configuration>
           </execution>
+          
+          <!-- Second execution with a LARGE scope -->
+          <execution>
+            <id>acctests-2-large</id>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <phase>integration-test</phase>
+            <configuration>
+              <excludes>
+                <exclude>none</exclude>
+              </excludes>
+              <includes>
+                <include>**/*AcceptanceTest.java</include>
+              </includes>
+              <systemPropertyVariables>
+                <acctests.scope>large</acctests.scope>
+              </systemPropertyVariables>
+            </configuration>
+          </execution>
+          
         </executions>
       </plugin>
     </plugins>

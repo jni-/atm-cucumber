@@ -5,14 +5,14 @@ import ca.ulaval.glo4002.atm_api.AtmServer;
 public class JettyRunner {
     public static final int JETTY_TEST_PORT = 15146;
 
-    private static boolean isFirstFeature = true;
+    private static boolean alreadyStarted = false;
     private AtmServer server;
 
     public void startJettyServer() {
-        if (isFirstFeature) {
+        if (!alreadyStarted) {
+            alreadyStarted = true;
             Runtime.getRuntime().addShutdownHook(new JettyServerShutdown());
             startAtmServerInJetty();
-            isFirstFeature = false;
         }
     }
 
