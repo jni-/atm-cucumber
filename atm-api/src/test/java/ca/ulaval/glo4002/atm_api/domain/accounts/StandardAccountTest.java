@@ -57,41 +57,41 @@ public class StandardAccountTest {
     
     // ------ NEW TESTS (ATDD demo)
     
-    @Test
-    public void transferMoneyRefusesIfMoreThanTheMaxLimitPerTransactionOfTheSource() {
-        double maxPerTransactionLimit = 10.0;
-        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
-        
-        TransactionLog log = sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit + 1);
-        
-        assertFalse(log.isAccepted());
-    }
-    
-    @Test
-    public void noMoneyTransferedIfMoreThanTheMaxLimitPerTransactionOfTheSource() {
-        double maxPerTransactionLimit = 10.0;
-        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
-        
-        sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit + 1);
-        
-        assertEquals(INITIAL_AMOUNT_SOURCE, sourceAccount.balance, DELTA);
-    }
-    
-    @Test
-    public void transferMoneyRefusesIfEqualsTheMaxLimitPerTransactionOfTheSource() {
-        double maxPerTransactionLimit = 10.0;
-        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
-        
-        TransactionLog log = sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit);
-        
-        assertTrue(log.isAccepted());
-    }
-    
-    @Test
-    public void byDefaultTheMaxPerTransactionLimitIs1999() {
-        double initialLimit = sourceAccount.getMaxPerTransactionLimit();
-        assertEquals(1999, initialLimit, DELTA);
-    }
+//    @Test
+//    public void transferMoneyRefusesIfMoreThanTheMaxLimitPerTransactionOfTheSource() {
+//        double maxPerTransactionLimit = 10.0;
+//        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
+//        
+//        TransactionLog log = sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit + 1);
+//        
+//        assertFalse(log.isAccepted());
+//    }
+//    
+//    @Test
+//    public void noMoneyTransferedIfMoreThanTheMaxLimitPerTransactionOfTheSource() {
+//        double maxPerTransactionLimit = 10.0;
+//        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
+//        
+//        sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit + 1);
+//        
+//        assertEquals(INITIAL_AMOUNT_SOURCE, sourceAccount.balance, DELTA);
+//    }
+//    
+//    @Test
+//    public void transferMoneyRefusesIfEqualsTheMaxLimitPerTransactionOfTheSource() {
+//        double maxPerTransactionLimit = 10.0;
+//        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
+//        
+//        TransactionLog log = sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit);
+//        
+//        assertTrue(log.isAccepted());
+//    }
+//    
+//    @Test
+//    public void byDefaultTheMaxPerTransactionLimitIs1999() {
+//        double initialLimit = sourceAccount.getMaxPerTransactionLimit();
+//        assertEquals(1999, initialLimit, DELTA);
+//    }
 
 }
 

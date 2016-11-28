@@ -24,8 +24,8 @@ public abstract class Account {
     @Column
     protected double balance;
 
-    @Column
-    protected double maxPerTransactionLimit = 1999;
+//    @Column
+//    protected double maxPerTransactionLimit = 1999;
 
     protected Account() {
         // for hibernate
@@ -48,8 +48,8 @@ public abstract class Account {
         return balance;
     }
 
-    public void setMaxTransactionLimit(double maxPerTransactionLimit) {
-        this.maxPerTransactionLimit = maxPerTransactionLimit;
-    }
+//    public void setMaxTransactionLimit(double maxPerTransactionLimit) {
+//        this.maxPerTransactionLimit = maxPerTransactionLimit;
+//    }
 
 }

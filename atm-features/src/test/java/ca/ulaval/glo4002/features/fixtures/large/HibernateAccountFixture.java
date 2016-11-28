@@ -37,13 +37,13 @@ public class HibernateAccountFixture extends HibernateBaseFixture implements Acc
 
     @Override
     public void givenTheLimitForAccount(Integer accountNumber, Double maxLimit) {
-        withEntityManager((tx) -> {
-            tx.begin();
-            Account account = accountRepository.findByNumber(accountNumber);
-            account.setMaxTransactionLimit(maxLimit);
-            accountRepository.persist(account);
-            tx.commit();
-        });
+//        withEntityManager((tx) -> {
+//            tx.begin();
+//            Account account = accountRepository.findByNumber(accountNumber);
+//            account.setMaxTransactionLimit(maxLimit);
+//            accountRepository.persist(account);
+//            tx.commit();
+//        });
     }
 
 }
