@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.features.fixtures;
+package ca.ulaval.glo4002.features.fixtures.large;
 
 import static io.restassured.RestAssured.given;
 

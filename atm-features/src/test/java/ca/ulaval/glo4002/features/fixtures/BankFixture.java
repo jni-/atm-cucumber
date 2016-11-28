@@ -1,21 +1,7 @@
 package ca.ulaval.glo4002.features.fixtures;
 
-import ca.ulaval.glo4002.atm_api.application.banking.BankingService;
-import ca.ulaval.glo4002.atm_api.rest.TransferRequest;
+public interface BankFixture {
 
-public class BankFixture extends HibernateBaseFixture {
-    
-    private BankingService bank;
+    void whenATransferIsMade(Integer sourceAccountNumber, Integer recipientAccountNumber, Double amount);
 
-    public BankFixture() {
-        bank = new BankingService();
-    }
-
-    public void whenATransferIsMade(Integer sourceAccountNumber, Integer recipientAccountNumber, Double amount) {
-        TransferRequest transferRequest = new TransferRequest(amount);
-
-        withEntityManager((tx) -> {
-            bank.transferMoney(sourceAccountNumber, recipientAccountNumber, transferRequest);
-        });
-    }
 }

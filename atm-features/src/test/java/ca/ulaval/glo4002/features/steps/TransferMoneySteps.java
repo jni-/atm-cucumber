@@ -3,13 +3,16 @@ package ca.ulaval.glo4002.features.steps;
 import ca.ulaval.glo4002.features.contexts.AcceptanceContext;
 import ca.ulaval.glo4002.features.fixtures.AccountFixture;
 import ca.ulaval.glo4002.features.fixtures.BankFixture;
-import ca.ulaval.glo4002.features.fixtures.TransferMoneyRestFixture;
+import ca.ulaval.glo4002.features.fixtures.TransferMoneyFixture;
+import ca.ulaval.glo4002.features.fixtures.large.HibernateAccountFixture;
+import ca.ulaval.glo4002.features.fixtures.large.HibernateBankFixture;
+import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
 public class TransferMoneySteps implements En {
     
-    private TransferMoneyRestFixture transferMoney;
+    private TransferMoneyFixture transferMoney;
     private AccountFixture accounts;
     private BankFixture bank;
 
@@ -17,9 +20,9 @@ public class TransferMoneySteps implements En {
     public void beforeScenario() {
         new AcceptanceContext().apply();
 
-        transferMoney = new TransferMoneyRestFixture();
-        accounts = new AccountFixture();
-        bank = new BankFixture();
+        transferMoney = new RestTransferMoneyFixture();
+        accounts = new HibernateAccountFixture();
+        bank = new HibernateBankFixture();
     }
 
     public TransferMoneySteps() {
