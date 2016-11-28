@@ -1,15 +1,12 @@
 package ca.ulaval.glo4002.features.steps;
 
 import ca.ulaval.glo4002.features.fixtures.AccountFixture;
-import ca.ulaval.glo4002.features.fixtures.BankFixture;
 import ca.ulaval.glo4002.features.fixtures.TransferMoneyFixture;
 import ca.ulaval.glo4002.features.fixtures.domain.AcceptanceDomainContext;
 import ca.ulaval.glo4002.features.fixtures.domain.DomainAccoungFixture;
-import ca.ulaval.glo4002.features.fixtures.domain.DomainBankFixture;
 import ca.ulaval.glo4002.features.fixtures.domain.DomainTransferMoneyFixture;
 import ca.ulaval.glo4002.features.fixtures.large.AcceptanceLargeContext;
 import ca.ulaval.glo4002.features.fixtures.large.HibernateAccountFixture;
-import ca.ulaval.glo4002.features.fixtures.large.HibernateBankFixture;
 import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
 import ca.ulaval.glo4002.features.runners.JettyStarterHook;
 import cucumber.api.java.Before;
@@ -19,7 +16,6 @@ public class TransferMoneySteps implements En {
 
     private TransferMoneyFixture transferMoney;
     private AccountFixture accounts;
-    private BankFixture bank;
 
     @Before
     public void beforeScenario() throws Throwable {
@@ -34,15 +30,12 @@ public class TransferMoneySteps implements En {
                 
                 transferMoney = new RestTransferMoneyFixture();
                 accounts = new HibernateAccountFixture();
-                bank = new HibernateBankFixture();
-                
                 break;
                 
             case "domain":
                 new AcceptanceDomainContext().apply();
                 transferMoney = new DomainTransferMoneyFixture();
                 accounts = new DomainAccoungFixture();
-                bank = new DomainBankFixture();
                 break;
 
             default:
@@ -58,7 +51,7 @@ public class TransferMoneySteps implements En {
         });
 
         When("^I create a transaction of (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {
-            bank.whenATransferIsMade(sourceAccountNumber, recipientAccountNumber, amount);
+            transferMoney.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
         });
 
         When("^I transfer (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {

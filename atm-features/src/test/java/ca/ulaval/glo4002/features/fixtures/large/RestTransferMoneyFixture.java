@@ -15,10 +15,7 @@ import io.restassured.response.Response;
 public class RestTransferMoneyFixture extends BaseRestFixture implements TransferMoneyFixture {
     
     private Response currentRequest;
-    
-    /* (non-Javadoc)
-     * @see ca.ulaval.glo4002.features.fixtures.large.TransferMoneyFixture#whenMoneyIsTransfered(int, int, double)
-     */
+   
     @Override
     public void whenMoneyIsTransfered(int sourceAccountNumber, int recipientAccountNumber, double amount) {
         String path = MoneyTransferResource.TRANSFER_PATH + "/{recipient}";
@@ -30,9 +27,6 @@ public class RestTransferMoneyFixture extends BaseRestFixture implements Transfe
             .post(uri);
     }
     
-    /* (non-Javadoc)
-     * @see ca.ulaval.glo4002.features.fixtures.large.TransferMoneyFixture#thenTheTransactionIsAccepted(double)
-     */
     @Override
     public void thenTheTransactionIsAccepted(double amount) {
         currentRequest.then()
@@ -41,9 +35,6 @@ public class RestTransferMoneyFixture extends BaseRestFixture implements Transfe
             .and().body("amount", equalTo((float) amount));
     }
 
-    /* (non-Javadoc)
-     * @see ca.ulaval.glo4002.features.fixtures.large.TransferMoneyFixture#thenTheTransactionIsRefused()
-     */
     @Override
     public void thenTheTransactionIsRefused() {
         currentRequest.then()
