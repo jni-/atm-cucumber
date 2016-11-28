@@ -52,7 +52,7 @@
         
         <executions>
         
-          <!-- First execution with a MEDIUM scope -->
+          <!-- First execution with all tests using MEDIUM scope -->
           <execution>
             <id>acctests-1-medium</id>
             <goals>
@@ -72,7 +72,7 @@
             </configuration>
           </execution>
           
-          <!-- Second execution with a LARGE scope -->
+          <!-- Second execution only HAPPYPATHs scenarios using LARGE scope-->
           <execution>
             <id>acctests-2-large</id>
             <goals>
@@ -88,6 +88,7 @@
               </includes>
               <systemPropertyVariables>
                 <acctests.scope>large</acctests.scope>
+                <cucumber.options>--tags @kind=happyPath</cucumber.options>
               </systemPropertyVariables>
             </configuration>
           </execution>

@@ -19,7 +19,7 @@ public class TransferMoneySteps implements En {
     //
     // *** Should be in a common hook or somewhere else on a real project
     //     because this hook is global to all Steps Definitions 
-    //     but in this demo we have only one Step Definiton so...
+    //     but in this demo we have only one Step Definition so...
     //
     @Before
     public void beforeScenario() throws Throwable {

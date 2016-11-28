@@ -3,6 +3,7 @@ Feature: Transfering money
     As a bank user
     I want to be able to transfer money to others
 
+@kind=happyPath
 Scenario: Transfering money adjusts the account balances 
     Given an account 111 with 1000$ in it
     And an account 222 with 500$ in it
@@ -10,6 +11,7 @@ Scenario: Transfering money adjusts the account balances
     Then the account 111 has 900$ in it
     And the account 222 has 600$ in it
     
+@kind=happyPath
 Scenario: Transfering money creates an accepted transaction log
     Given an account 333 with 1000$ in it
     And an account 444 with 500$ in it
