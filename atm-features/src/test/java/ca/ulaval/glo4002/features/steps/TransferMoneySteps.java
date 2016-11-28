@@ -1,12 +1,17 @@
 package ca.ulaval.glo4002.features.steps;
 
-import ca.ulaval.glo4002.features.contexts.AcceptanceContext;
 import ca.ulaval.glo4002.features.fixtures.AccountFixture;
 import ca.ulaval.glo4002.features.fixtures.BankFixture;
 import ca.ulaval.glo4002.features.fixtures.TransferMoneyFixture;
+import ca.ulaval.glo4002.features.fixtures.domain.AcceptanceDomainContext;
+import ca.ulaval.glo4002.features.fixtures.domain.DomainAccoungFixture;
+import ca.ulaval.glo4002.features.fixtures.domain.DomainBankFixture;
+import ca.ulaval.glo4002.features.fixtures.domain.DomainTransferMoneyFixture;
+import ca.ulaval.glo4002.features.fixtures.large.AcceptanceLargeContext;
 import ca.ulaval.glo4002.features.fixtures.large.HibernateAccountFixture;
 import ca.ulaval.glo4002.features.fixtures.large.HibernateBankFixture;
 import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
+import ca.ulaval.glo4002.features.runners.JettyStarterHook;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
@@ -17,16 +22,27 @@ public class TransferMoneySteps implements En {
     private BankFixture bank;
 
     @Before
-    public void beforeScenario() {
-        new AcceptanceContext().apply();
+    public void beforeScenario() throws Throwable {
 
         String testsScope = System.getProperty("acctests.scope", "UNDEFINED");
 
         switch (testsScope) {
             case "large":
+                new AcceptanceLargeContext().apply();
+                
+                new JettyStarterHook().runStartServerHook();
+                
                 transferMoney = new RestTransferMoneyFixture();
                 accounts = new HibernateAccountFixture();
                 bank = new HibernateBankFixture();
+                
+                break;
+                
+            case "domain":
+                new AcceptanceDomainContext().apply();
+                transferMoney = new DomainTransferMoneyFixture();
+                accounts = new DomainAccoungFixture();
+                bank = new DomainBankFixture();
                 break;
 
             default:

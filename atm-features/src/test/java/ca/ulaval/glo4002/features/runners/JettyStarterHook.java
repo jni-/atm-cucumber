@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.features.runners;
 
 import ca.ulaval.glo4002.atm_api.AtmServer;
-import ca.ulaval.glo4002.features.contexts.AcceptanceContext;
+import ca.ulaval.glo4002.features.fixtures.large.AcceptanceLargeContext;
 import cucumber.api.java.Before;
 
 public class JettyStarterHook {
@@ -10,8 +10,7 @@ public class JettyStarterHook {
     private static boolean isFirstFeature = true;
     private AtmServer server;
  
-    @Before
-    public void beforeAll() throws Exception {
+    public void runStartServerHook() throws Exception {
         if (isFirstFeature) {
             Runtime.getRuntime().addShutdownHook(new JettyServerShutdown());
             startJettyServer();
@@ -21,7 +20,7 @@ public class JettyStarterHook {
  
     private void startJettyServer() throws Exception {
         server = new AtmServer();
-        server.start(JETTY_TEST_PORT, new AcceptanceContext());
+        server.start(JETTY_TEST_PORT, new AcceptanceLargeContext());
     }
  
     private class JettyServerShutdown extends Thread {
