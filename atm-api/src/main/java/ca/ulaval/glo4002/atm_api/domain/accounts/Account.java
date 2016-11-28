@@ -24,6 +24,7 @@ public abstract class Account {
     @Column
     protected double balance;
 
+    @Column
     protected double maxPerTransactionLimit = 1999;
 
     protected Account() {

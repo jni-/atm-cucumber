@@ -29,7 +29,8 @@ Scenario: Transfering money when the account doesn't have the funds creates a re
     When I transfer 100$ from 555 to 666
     Then a transaction log shows that the transfer was refused
     
+@kind=integratedDbPath
 Scenario: Transfering more than the max limit
-    Given a maximum limit of 999$ per transfer for the account 333
-    When I transfer 1000$ from 333
+    Given a maximum limit of 999$ per transfer for the account 888
+    When I transfer 1000$ from 888
     Then a transaction log shows that the transfer was refused

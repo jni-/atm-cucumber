@@ -88,7 +88,7 @@
               </includes>
               <systemPropertyVariables>
                 <acctests.scope>large</acctests.scope>
-                <cucumber.options>--tags @kind=happyPath</cucumber.options>
+                <cucumber.options>--tags @kind=happyPath,@kind=integratedDbPath</cucumber.options>
               </systemPropertyVariables>
             </configuration>
           </execution>

@@ -15,5 +15,6 @@ public class AcceptanceLargeContext implements Context {
         ServiceLocator.registerSingleton(BankingService.class, new BankingService());
 
         new JettyRunner().startJettyServer();
+        
     }
 }

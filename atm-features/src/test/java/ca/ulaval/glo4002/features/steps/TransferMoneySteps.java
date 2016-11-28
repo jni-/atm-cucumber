@@ -14,7 +14,7 @@ import cucumber.api.java8.En;
 
 public class TransferMoneySteps implements En {
 
-    private static final int SOME_ACCOUNT_NUMBER = Integer.MAX_VALUE;
+    private static final int SOME_ACCOUNT_NUMBER = 1056;
 
     private TransferMoneyFixture transferMoneyFixture;
     private AccountFixture accountsFixture;
