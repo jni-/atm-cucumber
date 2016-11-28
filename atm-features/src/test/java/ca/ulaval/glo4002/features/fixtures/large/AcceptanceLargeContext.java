@@ -13,5 +13,7 @@ public class AcceptanceLargeContext implements Context {
         ServiceLocator.reset();
         ServiceLocator.registerSingleton(AccountRepository.class, new HibernateAccountRepository());
         ServiceLocator.registerSingleton(BankingService.class, new BankingService());
+
+        new JettyRunner().startJettyServer();
     }
 }

@@ -8,14 +8,13 @@ import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.AcceptanceMediumAppContext;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppAccoungFixture;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppTransferMoneyFixture;
-import ca.ulaval.glo4002.features.runners.JettyStarterHook;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
 public class TransferMoneySteps implements En {
 
-    private TransferMoneyFixture transferMoney;
-    private AccountFixture accounts;
+    private TransferMoneyFixture transferMoneyFixture;
+    private AccountFixture accountsFixture;
 
     @Before
     public void beforeScenario() throws Throwable {
@@ -26,16 +25,15 @@ public class TransferMoneySteps implements En {
             case "large":
                 new AcceptanceLargeContext().apply();
                 
-                new JettyStarterHook().runStartServerHook();
-                
-                transferMoney = new RestTransferMoneyFixture();
-                accounts = new HibernateAccountFixture();
+                transferMoneyFixture = new RestTransferMoneyFixture();
+                accountsFixture = new HibernateAccountFixture();
                 break;
                 
             case "mediumapp":
                 new AcceptanceMediumAppContext().apply();
-                transferMoney = new MediumAppTransferMoneyFixture();
-                accounts = new MediumAppAccoungFixture();
+                
+                transferMoneyFixture = new MediumAppTransferMoneyFixture();
+                accountsFixture = new MediumAppAccoungFixture();
                 break;
 
             default:
@@ -47,27 +45,27 @@ public class TransferMoneySteps implements En {
     public TransferMoneySteps() {
 
         Given("^an account (\\d+) with (\\d+)\\$ in it$", (Integer accountNumber, Double initialAmount) -> {
-            accounts.givenAnAccount(accountNumber, initialAmount);
+            accountsFixture.givenAnAccount(accountNumber, initialAmount);
         });
 
         When("^I create a transaction of (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {
-            transferMoney.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
+            transferMoneyFixture.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
         });
 
         When("^I transfer (\\d+)\\$ from (\\d+) to (\\d+)$", (Double amount, Integer sourceAccountNumber, Integer recipientAccountNumber) -> {
-            transferMoney.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
+            transferMoneyFixture.whenMoneyIsTransfered(sourceAccountNumber, recipientAccountNumber, amount);
         });
 
         Then("^the account (\\d+) has (\\d+)\\$ in it$", (Integer accountNumber, Double expectedAmount) -> {
-            accounts.thenAccountBalanceEquals(accountNumber, expectedAmount);
+            accountsFixture.thenAccountBalanceEquals(accountNumber, expectedAmount);
         });
 
         Then("^a transaction log is created for the amount of (\\d+)\\$$", (Double expectedAmount) -> {
-            transferMoney.thenTheTransactionIsAccepted(expectedAmount);
+            transferMoneyFixture.thenTheTransactionIsAccepted(expectedAmount);
         });
 
         Then("^a transaction log shows that the transfer was refused$", () -> {
-            transferMoney.thenTheTransactionIsRefused();
+            transferMoneyFixture.thenTheTransactionIsRefused();
         });
 
     }

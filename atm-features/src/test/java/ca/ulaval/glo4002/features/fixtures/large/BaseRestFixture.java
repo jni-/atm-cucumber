@@ -4,7 +4,6 @@ import static io.restassured.RestAssured.given;
 
 import javax.ws.rs.core.MediaType;
 
-import ca.ulaval.glo4002.features.runners.JettyStarterHook;
 import io.restassured.specification.RequestSpecification;
 
 public class BaseRestFixture {
@@ -13,7 +12,7 @@ public class BaseRestFixture {
         return given()
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
-            .port(JettyStarterHook.JETTY_TEST_PORT);
+            .port(JettyRunner.JETTY_TEST_PORT);
     }
 
 }

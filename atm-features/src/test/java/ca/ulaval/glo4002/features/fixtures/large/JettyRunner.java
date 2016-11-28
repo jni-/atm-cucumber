@@ -1,28 +1,26 @@
-package ca.ulaval.glo4002.features.runners;
+package ca.ulaval.glo4002.features.fixtures.large;
 
 import ca.ulaval.glo4002.atm_api.AtmServer;
-import ca.ulaval.glo4002.features.fixtures.large.AcceptanceLargeContext;
-import cucumber.api.java.Before;
 
-public class JettyStarterHook {
+public class JettyRunner {
     public static final int JETTY_TEST_PORT = 15146;
- 
+
     private static boolean isFirstFeature = true;
     private AtmServer server;
- 
-    public void runStartServerHook() throws Exception {
+
+    public void startJettyServer() {
         if (isFirstFeature) {
             Runtime.getRuntime().addShutdownHook(new JettyServerShutdown());
-            startJettyServer();
+            startAtmServerInJetty();
             isFirstFeature = false;
         }
     }
- 
-    private void startJettyServer() throws Exception {
+
+    private void startAtmServerInJetty() {
         server = new AtmServer();
         server.start(JETTY_TEST_PORT, new AcceptanceLargeContext());
     }
- 
+
     private class JettyServerShutdown extends Thread {
         public void run() {
             try {
