@@ -2,12 +2,12 @@ package ca.ulaval.glo4002.features.steps;
 
 import ca.ulaval.glo4002.features.fixtures.AccountFixture;
 import ca.ulaval.glo4002.features.fixtures.TransferMoneyFixture;
-import ca.ulaval.glo4002.features.fixtures.domain.AcceptanceDomainContext;
-import ca.ulaval.glo4002.features.fixtures.domain.DomainAccoungFixture;
-import ca.ulaval.glo4002.features.fixtures.domain.DomainTransferMoneyFixture;
 import ca.ulaval.glo4002.features.fixtures.large.AcceptanceLargeContext;
 import ca.ulaval.glo4002.features.fixtures.large.HibernateAccountFixture;
 import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
+import ca.ulaval.glo4002.features.fixtures.mediumapp.AcceptanceMediumAppContext;
+import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppAccoungFixture;
+import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppTransferMoneyFixture;
 import ca.ulaval.glo4002.features.runners.JettyStarterHook;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
@@ -32,10 +32,10 @@ public class TransferMoneySteps implements En {
                 accounts = new HibernateAccountFixture();
                 break;
                 
-            case "domain":
-                new AcceptanceDomainContext().apply();
-                transferMoney = new DomainTransferMoneyFixture();
-                accounts = new DomainAccoungFixture();
+            case "mediumapp":
+                new AcceptanceMediumAppContext().apply();
+                transferMoney = new MediumAppTransferMoneyFixture();
+                accounts = new MediumAppAccoungFixture();
                 break;
 
             default:
