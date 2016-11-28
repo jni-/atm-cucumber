@@ -2,9 +2,10 @@ package ca.ulaval.glo4002.atm_api.domain.accounts;
 
 import static org.junit.Assert.*;
 
-import ca.ulaval.glo4002.atm_api.domain.accounts.transactions.TransactionLog;
 import org.junit.Before;
 import org.junit.Test;
+
+import ca.ulaval.glo4002.atm_api.domain.accounts.transactions.TransactionLog;
 
 public class StandardAccountTest {
     
@@ -16,7 +17,7 @@ public class StandardAccountTest {
     private static final int RECIPIENT_ACCOUNT_NUMBER = 2;
 
     private StandardAccount sourceAccount;
-    private StandardAccount recipientAccount;
+    private Account recipientAccount;
 
     @Before
     public void setUp() {
@@ -53,5 +54,49 @@ public class StandardAccountTest {
         assertTrue(log.isAccepted());
         assertEquals(TRANSFER_AMOUNT, log.getAmount(), DELTA);
     }
+    
+    // ------ NEW TESTS (ATDD demo)
+    
+    @Test
+    public void transferMoneyRefusesIfMoreThanTheMaxLimitPerTransactionOfTheSource() {
+        double maxPerTransactionLimit = 10.0;
+        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
+        
+        TransactionLog log = sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit + 1);
+        
+        assertFalse(log.isAccepted());
+    }
+    
+    @Test
+    public void noMoneyTransferedIfMoreThanTheMaxLimitPerTransactionOfTheSource() {
+        double maxPerTransactionLimit = 10.0;
+        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
+        
+        sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit + 1);
+        
+        assertEquals(INITIAL_AMOUNT_SOURCE, sourceAccount.balance, DELTA);
+    }
+    
+    @Test
+    public void transferMoneyRefusesIfEqualsTheMaxLimitPerTransactionOfTheSource() {
+        double maxPerTransactionLimit = 10.0;
+        sourceAccount.setMaxTransactionLimit(maxPerTransactionLimit);
+        
+        TransactionLog log = sourceAccount.transferMoneyTo(recipientAccount, maxPerTransactionLimit);
+        
+        assertTrue(log.isAccepted());
+    }
+    
+    @Test
+    public void byDefaultTheMaxPerTransactionLimitIs1999() {
+        double initialLimit = sourceAccount.getMaxPerTransactionLimit();
+        assertEquals(1999, initialLimit, DELTA);
+    }
 
 }
+
+
+
+
+
+

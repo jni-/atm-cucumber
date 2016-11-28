@@ -16,6 +16,10 @@ public class StandardAccount extends Account {
     }
 
     public TransactionLog transferMoneyTo(Account recipientAccount, double amount) {
+        if(amount > maxPerTransactionLimit) {
+            return TransactionLog.refused(amount);
+        }
+        
         if(amount > balance) {
             return TransactionLog.refused(amount);
         }
@@ -28,6 +32,10 @@ public class StandardAccount extends Account {
 
     public void credit(double amount) {
         balance += amount;
+    }
+
+    protected double getMaxPerTransactionLimit() {
+        return maxPerTransactionLimit;
     }
 
 }

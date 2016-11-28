@@ -31,7 +31,8 @@ public class MediumAppAccoungFixture implements AccountFixture {
 
     @Override
     public void givenTheLimitForAccount(Integer accountNumber, Double maxLimit) {
-        throw new RuntimeException("TODO");
+        Account account = accountRepository.findByNumber(accountNumber);
+        account.setMaxTransactionLimit(maxLimit);
     }
 
 }
