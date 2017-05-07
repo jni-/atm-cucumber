@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.features.fixtures.large;
+package ca.ulaval.glo4002.features.fixtures.largeapi;
 
 import static org.hamcrest.Matchers.equalTo;
 

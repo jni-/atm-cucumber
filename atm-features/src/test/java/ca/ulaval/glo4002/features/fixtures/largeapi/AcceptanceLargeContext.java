@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.features.fixtures.large;
+package ca.ulaval.glo4002.features.fixtures.largeapi;
 
 import ca.ulaval.glo4002.atm_api.application.ServiceLocator;
 import ca.ulaval.glo4002.atm_api.application.banking.BankingService;

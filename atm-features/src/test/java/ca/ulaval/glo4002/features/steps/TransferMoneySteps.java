@@ -2,9 +2,9 @@ package ca.ulaval.glo4002.features.steps;
 
 import ca.ulaval.glo4002.features.fixtures.AccountFixture;
 import ca.ulaval.glo4002.features.fixtures.TransferMoneyFixture;
-import ca.ulaval.glo4002.features.fixtures.large.AcceptanceLargeContext;
-import ca.ulaval.glo4002.features.fixtures.large.HibernateAccountFixture;
-import ca.ulaval.glo4002.features.fixtures.large.RestTransferMoneyFixture;
+import ca.ulaval.glo4002.features.fixtures.largeapi.AcceptanceLargeContext;
+import ca.ulaval.glo4002.features.fixtures.largeapi.HibernateAccountFixture;
+import ca.ulaval.glo4002.features.fixtures.largeapi.RestTransferMoneyFixture;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.AcceptanceMediumAppContext;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppAccoungFixture;
 import ca.ulaval.glo4002.features.fixtures.mediumapp.MediumAppTransferMoneyFixture;
