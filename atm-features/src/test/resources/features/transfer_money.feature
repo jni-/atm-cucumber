@@ -11,13 +11,14 @@ Scenario: Transfering money adjusts the account balances
     Then the account 111 has 900$ in it
     And the account 222 has 600$ in it
     
-@kind=happyPath
+@kind=happyPath @focus
 Scenario: Transfering money creates an accepted transaction log
     Given an account 333 with 1000$ in it
     And an account 444 with 500$ in it
     When I transfer 100$ from 333 to 444
     Then a transaction log is created for the amount of 100$
 
+@focus
 Scenario: Transfering money when the account doesn't have the funds creates a refused transaction
     Given an account 555 with 99$ in it
     And an account 666 with 500$ in it
