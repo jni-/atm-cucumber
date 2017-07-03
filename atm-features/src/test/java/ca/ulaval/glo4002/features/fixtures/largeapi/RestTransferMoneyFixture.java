@@ -23,7 +23,7 @@ public class RestTransferMoneyFixture extends BaseRestFixture implements Transfe
 
         currentRequest = givenAtmRequest()
             .body(new TransferRequest(amount))
-        .when()
+            .when()
             .post(uri);
     }
     
